@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Nash's Calender</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+    <script src="../static/js/index.js"></script>
+  </head>
+  <body>
+    <div class="calender">
+      <div class="header">
+        <img class="menu-icon" src="../static/images/menu.svg">
+        <div class="search-container">
+          <div class="searchbar">
+            <img class="search-icon" src="../static/images/search.svg">
+            <input type="search" class="searchbox" placeholder="Search Here">
+          </div>
+        </div>
+        <div class="profile">
+          <img class="profile-pic" src="../static/images/profile-pic.svg">
+          <span class="profile-name">Nash Pillai</span>
+          <img class="profile-dropdown" src="../static/images/drop-down.svg">
+        </div>
+      </div>
+
+
+      <div class="sidebar">
+        <button class="create-event">
+          <img class="plus-icon" src="../static/images/plus.svg">
+          <span class="add-event">Add Event</span>
+        </button>
+        <p class="upcoming-events">Upcoming events:</p>
+        <div class="upcoming-event-list">
+          <span class="upcoming-event-date">Thurs, Mar 20</span>
+          <span class="upcoming-event-title">Ducky's Birthday</span>
+          <span class="upcoming-event-date">Thurs, Mar 20</span>
+          <span class="upcoming-event-title">Ducky's Birthday</span>
+          <span class="upcoming-event-date">Thurs, Mar 20</span>
+          <span class="upcoming-event-title">Ducky's Birthday</span>
+          <span class="upcoming-event-date">Thurs, Mar 20</span>
+          <span class="upcoming-event-title">Ducky's Birthday</span>
+          <span class="link upcoming-event-see-more">See More</span>
+        </div>
+      </div>
+
+
+      <div class="month-view">
+        <div class="month-view-title">
+          <img class="left-month-arrow" onclick="changeMonth(-1)" src="../static/images/arrow_left.svg">
+          <span class="month-name" id="month-name">January 2020</span>
+          <img class="right-month-arrow" onclick="changeMonth(1)" src="../static/images/arrow_right.svg">
+        </div>
+        <table class="month-view-body">
+          <thead>
+            <tr>
+              <th class="month-view">Sunday</th>
+              <th class="month-view">Monday</th>
+              <th class="month-view">Tuesday</th>
+              <th class="month-view">Wednesday</th>
+              <th class="month-view">Thursday</th>
+              <th class="month-view">Friday</th>
+              <th class="month-view">Saturday</th>
+            </tr>
+          </thead>
+          <tbody id="month-view-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
