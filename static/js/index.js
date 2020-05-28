@@ -1,18 +1,22 @@
-var custom = {
-  ce: (name, attributes, children) => {
-    if (name == "__TEXT__") {return document.createTextNode(children)}
-    let element = document.createElement(name);
-    for (var k of Object.keys(attributes)) {element.setAttribute(k, attributes[k])}
-    children.forEach((child) => {element.appendChild(custom.ce(...child))});
-    return element
-  }
-}
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-var addEvents = (td) => {}
+var addEvents = (td) => {};
 var getMonthLen = (month, year) => new Date(year, month + 1, 0).getDate();
 var getMonthStart = (month, year) => new Date(year, month, 1).getDay();
-var today = new Date(), currentDate;
-
+var today = new Date(), currentMonth, darkThemeEnabled;
+const styles = {
+  "darkTheme": {
+    "--theme-text-color1": "white",
+    "--theme-background-color1": "#3C3C3C",
+    "--theme-background-color2": "#555555",
+    "--theme-background-color3": "#2C2C2C"
+  },
+  "lightTheme": {
+    "--theme-text-color1": "black",
+    "--theme-background-color1": "white",
+    "--theme-background-color2": "white",
+    "--theme-background-color3": "white"
+  }
+}
 
 function setMonth(month, year) {
   var tb = document.getElementById("month-view-tbody"), daysLeft;
@@ -21,7 +25,6 @@ function setMonth(month, year) {
   }
 
   var monthStart = getMonthStart(month, year), prevMonthLen = getMonthLen(month - 1, year);
-  console.log(months[month - 1], prevMonthLen)
 
   document.getElementById("month-name").innerText = months[month] + " " + year;
   var tr = custom.ce("tr", {}, []), day = 0;
@@ -98,3 +101,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
   currentMonth = new Date(today.getFullYear(), today.getMonth())
   setMonth(currentMonth.getMonth(), currentMonth.getFullYear())
 });
+
+
+
+function changeTheme(darkTheme) {
+  if (darkThemeEnabled) {
+    custom.setCSS(document.getElementById("body"), styles.lightTheme)
+  } else {
+    custom.setCSS(document.getElementById("body"), styles.darkTheme)
+  }
+  darkThemeEnabled = !darkThemeEnabled;
+}

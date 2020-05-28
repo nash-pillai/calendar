@@ -1,9 +1,33 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, send_from_directory
+from datetime import datetime
+from utils import colorize
+import os
+import logging
 
 app = Flask(__name__)
+logging.getLogger('werkzeug').disabled = True
+
+
+@app.before_first_request
+def logs_request_info():
+  print(colorize("90", "First request"))
+
+@app.before_request
+def log_request_info():
+  print(
+    colorize("92", request.method), "request", 
+    "at", colorize("95", str(datetime.now())), 
+    "from", colorize("93", request.environ['REMOTE_ADDR']), 
+    "for", colorize("96", request.script_root + request.path)
+  )
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+  return render_template('index.html')
 
-app.run('0.0.0.0',8080)
+@app.route('/favicon.ico')
+def favicon():
+  return send_from_directory(os.path.join(app.root_path, "static", "images"), "favicon.ico", mimetype='image/vnd.microsoft.icon')
+
+print("Server started")
+app.run('0.0.0.0', 8080, debug=True, use_reloader=True)
