@@ -1,7 +1,8 @@
 var custom = {
-  "ce": (name, attributes, children) => {
-    if (name == "__TEXT__") {return document.createTextNode(children)}
-    let element = document.createElement(name);
+  "ce": (name, attributes={}, ...children) => {
+    if (name == "__TEXT__") {return document.createTextNode(children[0] || "")}
+
+    let element = name == "__FRAG__" ? new DocumentFragment() : document.createElement(name);
     for (var k of Object.keys(attributes)) {element.setAttribute(k, attributes[k])}
     children.forEach((child) => {element.appendChild(custom.ce(...child))});
     return element
